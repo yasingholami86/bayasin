@@ -90,11 +90,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         property: "og:description",
         content:
-          "Intelligent automation systems that transform manual processes into 24/7 workflows. Built by Yasin.",
+          "Yasin Labs designs and ships AI-powered automation systems with n8n, APIs, and modern tooling. Case studies with real metrics, architectures, and business impact.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@ba_yasin" },
+      { name: "twitter:title", content: "Yasin Labs — AI Automation Systems, Engineered" },
+      { name: "twitter:description", content: "Yasin Labs designs and ships AI-powered automation systems with n8n, APIs, and modern tooling. Case studies with real metrics, architectures, and business impact." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/52d6bd7d-c82f-40f7-a05a-f1605761557f/id-preview-09f1fdcc--d6ea9a71-52c0-4cd5-acff-bff7869db3af.lovable.app-1784158679300.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/52d6bd7d-c82f-40f7-a05a-f1605761557f/id-preview-09f1fdcc--d6ea9a71-52c0-4cd5-acff-bff7869db3af.lovable.app-1784158679300.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
