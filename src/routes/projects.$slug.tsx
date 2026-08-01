@@ -4,6 +4,7 @@ import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis, Cell } from 
 import { Counter } from "@/components/site/Counter";
 import { StatusDot } from "@/components/site/StatusDot";
 import { getProject, projects, type Project } from "@/data/projects";
+import { ProjectGallery } from "@/components/ui/project_gallery";
 
 export const Route = createFileRoute("/projects/$slug")({
   loader: ({ params }) => {
@@ -28,40 +29,39 @@ export const Route = createFileRoute("/projects/$slug")({
   component: ProjectDetail,
   notFoundComponent: () => (
     <div className="mx-auto max-w-3xl px-6 py-32 text-center">
-      <h1 className="font-display text-4xl">Project not found</h1>
-      <Link to="/projects" className="mt-6 inline-block text-brand">← All projects</Link>
+      <h1 className="font-display text-4xl">پروژه پیدا نشد</h1>
+      <Link to="/projects" className="mt-6 inline-block text-brand">← همه پروژه‌ها</Link>
     </div>
   ),
-});
-
-function Stars({ n }: { n: number }) {
-  return (
-    <div className="flex gap-0.5">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star
-          key={i}
-          className={`h-4 w-4 ${i < n ? "fill-brand text-brand" : "text-muted-foreground/40"}`}
-        />
-      ))}
-    </div>
-  );
-}
-
-function ProjectDetail() {
-  const { project: p } = Route.useLoaderData() as { project: Project };
-  const idx = projects.findIndex((x) => x.slug === p.slug);
-  const next = projects[(idx + 1) % projects.length];
-
-  const chartData = [
-    { name: "Mon", tasks: 1200 },
-    { name: "Tue", tasks: 1850 },
-    { name: "Wed", tasks: 1620 },
-    { name: "Thu", tasks: 2100 },
-    { name: "Fri", tasks: 2380 },
-    { name: "Sat", tasks: 1420 },
-    { name: "Sun", tasks: 1780 },
-  ];
-
+  });
+  
+  function Stars({ n }: { n: number }) {
+    return (
+      <div className="flex gap-0.5">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <Star
+            key={i}
+            className={`h-4 w-4 ${i < n ? "fill-brand text-brand" : "text-muted-foreground/40"}`}
+          />
+        ))}
+      </div>
+    );
+  }
+  
+  function ProjectDetail() {
+    const { project: p } = Route.useLoaderData() as { project: Project };
+    const idx = projects.findIndex((x) => x.slug === p.slug);
+    const next = projects[(idx + 1) % projects.length];
+  
+    const chartData = [
+      { name: "دوشنبه", tasks: 1200 },
+      { name: "سه‌شنبه", tasks: 1850 },
+      { name: "چهارشنبه", tasks: 1620 },
+      { name: "پنجشنبه", tasks: 2100 },
+      { name: "جمعه", tasks: 2380 },
+      { name: "شنبه", tasks: 1420 },
+      { name: "یکشنبه", tasks: 1780 },
+    ];
   return (
     <div>
       {/* Header */}
@@ -151,151 +151,214 @@ function ProjectDetail() {
           </div>
         </div>
       </section>
+      <section className="mx-auto max-w-7xl px-6 py-16">
+      {p.gallery && (
+  <ProjectGallery images={p.gallery} />
+  
+)}
 
+  </section>
       {/* Problem / Solution */}
       <section className="mx-auto grid max-w-7xl gap-6 px-6 py-16 md:grid-cols-2">
-        <div className="rounded-xl border border-destructive/30 bg-surface/60 p-8">
-          <p className="text-xs font-mono uppercase tracking-widest text-destructive">// The Problem</p>
-          <h2 className="mt-3 font-display text-2xl font-semibold">Before automation</h2>
-          <ul className="mt-6 space-y-3">
-            {p.problem.map((x) => (
-              <li key={x} className="flex items-start gap-3 text-sm">
-                <XCircle className="mt-0.5 h-4 w-4 flex-none text-destructive" /> {x}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="rounded-xl border border-brand/30 bg-surface/60 p-8">
-          <p className="text-xs font-mono uppercase tracking-widest text-brand">// The Outcome</p>
-          <h2 className="mt-3 font-display text-2xl font-semibold">After automation</h2>
-          <ul className="mt-6 space-y-3">
-            {p.after.map((x) => (
-              <li key={x} className="flex items-start gap-3 text-sm">
-                <CheckCircle2 className="mt-0.5 h-4 w-4 flex-none text-brand" /> {x}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+  <div className="rounded-xl border border-destructive/30 bg-surface/60 p-8">
+    <p className="text-xs font-mono uppercase tracking-widest text-destructive">// مشکل</p>
+
+    <h2 className="mt-3 font-display text-2xl font-semibold">
+      قبل از اتوماسیون
+    </h2>
+
+    <ul className="mt-6 space-y-3">
+      {p.problem.map((x) => (
+        <li key={x} className="flex items-start gap-3 text-sm">
+          <XCircle className="mt-0.5 h-4 w-4 flex-none text-destructive" /> {x}
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div className="rounded-xl border border-brand/30 bg-surface/60 p-8">
+    <p className="text-xs font-mono uppercase tracking-widest text-brand">// نتیجه</p>
+
+    <h2 className="mt-3 font-display text-2xl font-semibold">
+      بعد از اتوماسیون
+    </h2>
+
+    <ul className="mt-6 space-y-3">
+      {p.after.map((x) => (
+        <li key={x} className="flex items-start gap-3 text-sm">
+          <CheckCircle2 className="mt-0.5 h-4 w-4 flex-none text-brand" /> {x}
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
 
       {/* Workflow */}
       <section className="mx-auto max-w-7xl px-6 py-16">
-        <p className="text-xs font-mono uppercase tracking-widest text-brand">// The Solution</p>
-        <h2 className="mt-3 font-display text-3xl font-semibold">Workflow architecture</h2>
-        <p className="mt-2 max-w-2xl text-muted-foreground">
-          The full automation pipeline, node by node.
-        </p>
-        <div className="mt-10 overflow-x-auto rounded-xl border border-border bg-surface/60 p-8">
-          <div className="flex min-w-max items-center gap-3">
-            {p.workflow.map((step, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <div className="group relative rounded-lg border border-border bg-background/60 px-5 py-4 transition-colors hover:border-brand/60">
-                  <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
-                    Node {String(i + 1).padStart(2, "0")}
-                  </p>
-                  <p className="mt-1 font-display text-sm font-semibold">{step}</p>
-                </div>
-                {i < p.workflow.length - 1 && (
-                  <div className="flex items-center">
-                    <div className="h-px w-6 bg-brand/60" />
-                    <ArrowRight className="h-4 w-4 text-brand" />
-                  </div>
-                )}
-              </div>
-            ))}
+  <p className="text-xs font-mono uppercase tracking-widest text-brand">// راهکار</p>
+
+  <h2 className="mt-3 font-display text-3xl font-semibold">
+    معماری گردش‌کار
+  </h2>
+
+  <p className="mt-2 max-w-2xl text-muted-foreground">
+    کل پایپ‌لاین اتوماسیون، مرحله به مرحله و نود به نود.
+  </p>
+
+  <div className="mt-10 overflow-x-auto rounded-xl border border-border bg-surface/60 p-8">
+    <div className="flex min-w-max items-center gap-3">
+      {p.workflow.map((step, i) => (
+        <div key={i} className="flex items-center gap-3">
+          <div className="group relative rounded-lg border border-border bg-background/60 px-5 py-4 transition-colors hover:border-brand/60">
+            <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+              نود {String(i + 1).padStart(2, "0")}
+            </p>
+
+            <p className="mt-1 font-display text-sm font-semibold">{step}</p>
           </div>
+
+          {i < p.workflow.length - 1 && (
+            <div className="flex items-center">
+              <div className="h-px w-6 bg-brand/60" />
+              <ArrowRight className="h-4 w-4 text-brand" />
+            </div>
+          )}
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* Before vs After table */}
       <section className="mx-auto max-w-7xl px-6 py-16">
-        <p className="text-xs font-mono uppercase tracking-widest text-brand">// Before vs After</p>
-        <h2 className="mt-3 font-display text-3xl font-semibold">The transformation</h2>
-        <div className="mt-8 overflow-hidden rounded-xl border border-border">
-          <div className="grid grid-cols-2 bg-surface/80 text-xs font-mono uppercase tracking-widest">
-            <div className="border-r border-border p-4 text-muted-foreground">Before</div>
-            <div className="p-4 text-brand">After</div>
-          </div>
-          {p.before.map((b, i) => (
-            <div key={i} className="grid grid-cols-2 border-t border-border">
-              <div className="border-r border-border bg-surface/40 p-4 text-sm text-muted-foreground">
-                {b}
-              </div>
-              <div className="bg-surface/60 p-4 text-sm">{p.after[i] ?? "—"}</div>
-            </div>
-          ))}
+  <p className="text-xs font-mono uppercase tracking-widest text-brand">// قبل و بعد</p>
+
+  <h2 className="mt-3 font-display text-3xl font-semibold">
+    تحول ایجاد شده
+  </h2>
+
+  <div className="mt-8 overflow-hidden rounded-xl border border-border">
+    <div className="grid grid-cols-2 bg-surface/80 text-xs font-mono uppercase tracking-widest">
+      <div className="border-r border-border p-4 text-muted-foreground">
+        قبل
+      </div>
+
+      <div className="p-4 text-brand">
+        بعد
+      </div>
+    </div>
+
+    {p.before.map((b, i) => (
+      <div key={i} className="grid grid-cols-2 border-t border-border">
+        <div className="border-r border-border bg-surface/40 p-4 text-sm text-muted-foreground">
+          {b}
         </div>
-      </section>
+
+        <div className="bg-surface/60 p-4 text-sm">
+          {p.after[i] ?? "—"}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
 
       {/* Architecture */}
       <section className="mx-auto max-w-7xl px-6 py-16">
-        <p className="text-xs font-mono uppercase tracking-widest text-brand">// Architecture</p>
-        <h2 className="mt-3 font-display text-3xl font-semibold">Systems diagram</h2>
-        <div className="mt-8 rounded-xl border border-border bg-surface/60 p-10">
-          <div className="mx-auto max-w-md space-y-2">
-            {p.architecture.map((layer, i) => (
-              <div key={i}>
-                <div className="rounded-lg border border-border bg-background/60 px-6 py-4 text-center">
-                  <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
-                    Layer {i + 1}
-                  </p>
-                  <p className="mt-1 font-display font-semibold">{layer}</p>
-                </div>
-                {i < p.architecture.length - 1 && (
-                  <div className="mx-auto my-1 h-6 w-px bg-brand/60" />
-                )}
-              </div>
-            ))}
+  <p className="text-xs font-mono uppercase tracking-widest text-brand">// معماری</p>
+
+  <h2 className="mt-3 font-display text-3xl font-semibold">
+    نمودار سیستم
+  </h2>
+
+  <div className="mt-8 rounded-xl border border-border bg-surface/60 p-10">
+    <div className="mx-auto max-w-md space-y-2">
+      {p.architecture.map((layer, i) => (
+        <div key={i}>
+          <div className="rounded-lg border border-border bg-background/60 px-6 py-4 text-center">
+            <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
+              لایه {i + 1}
+            </p>
+
+            <p className="mt-1 font-display font-semibold">{layer}</p>
           </div>
+
+          {i < p.architecture.length - 1 && (
+            <div className="mx-auto my-1 h-6 w-px bg-brand/60" />
+          )}
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* Timeline */}
       <section className="mx-auto max-w-7xl px-6 py-16">
-        <p className="text-xs font-mono uppercase tracking-widest text-brand">// Timeline</p>
-        <h2 className="mt-3 font-display text-3xl font-semibold">Development log</h2>
-        <div className="mt-10 grid gap-4 md:grid-cols-4">
-          {p.timeline.map((t, i) => (
-            <div key={i} className="rounded-xl border border-border bg-surface/60 p-6">
-              <p className="text-xs font-mono uppercase tracking-widest text-brand">{t.day}</p>
-              <h3 className="mt-2 font-display text-base font-semibold">{t.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{t.detail}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+  <p className="text-xs font-mono uppercase tracking-widest text-brand">// زمان‌بندی</p>
 
-      {/* Business impact + rating */}
-      <section className="mx-auto grid max-w-7xl gap-6 px-6 py-16 md:grid-cols-2">
-        <div className="rounded-xl border border-border bg-surface/60 p-8">
-          <p className="text-xs font-mono uppercase tracking-widest text-brand">// Business Impact</p>
-          <h2 className="mt-3 font-display text-2xl font-semibold">What it moved</h2>
-          <ul className="mt-6 space-y-3">
-            {p.impact.map((x) => (
-              <li key={x} className="flex items-start gap-3 text-sm">
-                <CheckCircle2 className="mt-0.5 h-4 w-4 flex-none text-brand" /> {x}
-              </li>
-            ))}
-          </ul>
+  <h2 className="mt-3 font-display text-3xl font-semibold">
+    گزارش توسعه
+  </h2>
+
+  <div className="mt-10 grid gap-4 md:grid-cols-4">
+    {p.timeline.map((t, i) => (
+      <div key={i} className="rounded-xl border border-border bg-surface/60 p-6">
+        <p className="text-xs font-mono uppercase tracking-widest text-brand">
+          {t.day}
+        </p>
+
+        <h3 className="mt-2 font-display text-base font-semibold">
+          {t.title}
+        </h3>
+
+        <p className="mt-2 text-sm text-muted-foreground">
+          {t.detail}
+        </p>
+      </div>
+    ))}
+  </div>
+</section>
+
+
+{/* تاثیر تجاری + امتیازدهی */}
+<section className="mx-auto grid max-w-7xl gap-6 px-6 py-16 md:grid-cols-2">
+  <div className="rounded-xl border border-border bg-surface/60 p-8">
+    <p className="text-xs font-mono uppercase tracking-widest text-brand">// تاثیر تجاری</p>
+
+    <h2 className="mt-3 font-display text-2xl font-semibold">
+      چه چیزی بهبود پیدا کرد
+    </h2>
+
+    <ul className="mt-6 space-y-3">
+      {p.impact.map((x) => (
+        <li key={x} className="flex items-start gap-3 text-sm">
+          <CheckCircle2 className="mt-0.5 h-4 w-4 flex-none text-brand" /> {x}
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div className="rounded-xl border border-border bg-surface/60 p-8">
+    <p className="text-xs font-mono uppercase tracking-widest text-brand">// ارزیابی فنی</p>
+
+    <h2 className="mt-3 font-display text-2xl font-semibold">
+      امتیاز پروژه
+    </h2>
+
+    <div className="mt-6 space-y-4">
+      {[
+        { label: "پیچیدگی", n: p.complexity },
+        { label: "سطح هوش مصنوعی", n: p.aiLevel },
+        { label: "سطح اتوماسیون", n: p.automationLevel },
+        { label: "تاثیر تجاری", n: p.businessImpact },
+      ].map((r) => (
+        <div key={r.label} className="flex items-center justify-between">
+          <p className="text-sm text-muted-foreground">{r.label}</p>
+          <Stars n={r.n} />
         </div>
-        <div className="rounded-xl border border-border bg-surface/60 p-8">
-          <p className="text-xs font-mono uppercase tracking-widest text-brand">// Technical Evaluation</p>
-          <h2 className="mt-3 font-display text-2xl font-semibold">Project ratings</h2>
-          <div className="mt-6 space-y-4">
-            {[
-              { label: "Complexity", n: p.complexity },
-              { label: "AI Level", n: p.aiLevel },
-              { label: "Automation Level", n: p.automationLevel },
-              { label: "Business Impact", n: p.businessImpact },
-            ].map((r) => (
-              <div key={r.label} className="flex items-center justify-between">
-                <p className="text-sm text-muted-foreground">{r.label}</p>
-                <Stars n={r.n} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* Next */}
       <section className="mx-auto max-w-7xl px-6 py-16">

@@ -14,8 +14,7 @@ export function SiteFooter() {
               <span className="font-display text-lg font-semibold">Yasin Labs</span>
             </div>
             <p className="mt-4 max-w-sm text-sm text-muted-foreground">
-              Intelligent automation systems that help businesses save time, reduce manual work, and
-              scale operations. Built by Yasin.
+            طراحی و توسعه سیستم‌های هوشمند اتوماسیون با n8n، هوش مصنوعی و API برای افزایش سرعت، کاهش هزینه و حذف فرآیندهای دستی کسب‌وکارها.
             </p>
             <div className="mt-6 flex gap-3">
               <a

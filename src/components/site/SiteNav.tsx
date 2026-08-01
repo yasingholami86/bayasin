@@ -12,16 +12,17 @@ export function SiteNav() {
           <div className="flex flex-col leading-none">
             <span className="font-display text-sm font-semibold tracking-tight">Yasin Labs</span>
             <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
-              automation.systems
+              سیستم‌های اتوماسیون
             </span>
           </div>
         </Link>
+
         <nav className="hidden items-center gap-1 md:flex">
           {[
-            { to: "/", label: "Home" },
-            { to: "/projects", label: "Projects" },
-            { to: "/about", label: "About" },
-            { to: "/contact", label: "Contact" },
+            { to: "/", label: "خانه" },
+            { to: "/projects", label: "نمونه‌کارها" },
+            { to: "/about", label: "درباره من" },
+            { to: "/contact", label: "تماس با من" },
           ].map((l) => (
             <Link
               key={l.to}
@@ -35,11 +36,12 @@ export function SiteNav() {
             </Link>
           ))}
         </nav>
+
         <Link
           to="/contact"
           className="hidden md:inline-flex items-center rounded-md bg-brand px-4 py-2 text-sm font-semibold text-brand-foreground shadow-[0_0_30px_-8px_var(--brand-glow)] transition-transform hover:scale-[1.03]"
         >
-          Start a project
+          شروع همکاری
         </Link>
       </div>
     </header>

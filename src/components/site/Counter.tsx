@@ -42,7 +42,7 @@ export function Counter({
     return () => io.disconnect();
   }, [to, duration]);
 
-  const formatted = value.toLocaleString(undefined, {
+  const formatted = value.toLocaleString("fa-IR", {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   });

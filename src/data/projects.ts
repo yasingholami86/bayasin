@@ -1,3 +1,10 @@
+
+
+export type ProjectGalleryImage = {
+  src: string;
+  alt?: string;
+  title?: string;
+};
 export type Project = {
   slug: string;
   title: string;
@@ -11,12 +18,19 @@ export type Project = {
   businessImpact: 1 | 2 | 3 | 4 | 5;
   status: "Live" | "Beta" | "Archived";
   createdAt: string;
+  // gallery?: ProjectGalleryImage[];
   metrics: {
     tasksExecuted: number;
     hoursSaved: number;
     costReduction: number;
     successRate: number;
+    
   };
+  gallery?: {
+    src:string;
+    alt?:string;
+    title?:string;
+  }[];
   problem: string[];
   workflow: string[];
   architecture: string[];
@@ -30,237 +44,1563 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "ai-news-automation",
-    title: "AI News Automation System",
-    tagline: "Autonomous tech news pipeline: scrape → translate → summarize → publish.",
+    title: "سیستم اتوماسیون اخبار با هوش مصنوعی",
+    tagline: "گردش‌کار هوشمند جمع‌آوری، ترجمه، خلاصه‌سازی و انتشار خودکار اخبار فناوری.",
     summary:
-      "An AI-powered system that collects technology news from 40+ sources, translates content, generates editorial summaries, stores structured data, and auto-publishes to WordPress and Telegram.",
-    category: "AI Automation",
-    technologies: ["n8n", "OpenAI", "PostgreSQL", "Telegram API", "WordPress", "Docker"],
+      "یک سیستم مبتنی بر هوش مصنوعی که اخبار فناوری را از بیش از ۴۰ منبع معتبر جمع‌آوری می‌کند، محتوای آن‌ها را ترجمه و خلاصه‌سازی کرده، اطلاعات را به‌صورت ساختاریافته در پایگاه داده ذخیره می‌کند و به‌طور خودکار در وردپرس و تلگرام منتشر می‌سازد.",
+  
+    category: "اتوماسیون هوش مصنوعی",
+  
+    technologies: [
+      "n8n",
+      "OpenAI",
+      "PostgreSQL",
+      "Telegram API",
+      "WordPress",
+      "Docker",
+    ],
+  
     complexity: 5,
     aiLevel: 5,
     automationLevel: 5,
     businessImpact: 4,
+  
     status: "Live",
+  
     createdAt: "2025-08-12",
-    metrics: { tasksExecuted: 125430, hoursSaved: 842, costReduction: 3200, successRate: 99.7 },
+  
+    metrics: {
+      tasksExecuted: 125430,
+      hoursSaved: 842,
+      costReduction: 3200,
+      successRate: 99.7,
+    },
+  
     problem: [
-      "Editors spent 5+ hours daily curating tech news",
-      "Manual translation caused delays and inconsistencies",
-      "Publishing pipeline was error-prone and slow",
-      "No structured archive for future retrieval",
+      "ویراستاران روزانه بیش از ۵ ساعت برای جمع‌آوری و بررسی اخبار فناوری زمان صرف می‌کردند.",
+      "ترجمه دستی باعث تأخیر در انتشار و ناهماهنگی محتوا می‌شد.",
+      "فرآیند انتشار زمان‌بر و مستعد خطاهای انسانی بود.",
+      "آرشیو ساختاریافته‌ای برای جستجو و استفاده مجدد از اخبار وجود نداشت.",
     ],
-    workflow: ["RSS Feed", "Scraper", "AI Processing", "Translation", "Summary", "Database", "Publish"],
-    architecture: ["Data Source", "Automation Engine", "AI Processing", "PostgreSQL", "Output Channels"],
-    before: ["5 hours daily work", "Manual translation & QA", "Human formatting errors", "Limited scalability"],
-    after: ["10 minutes monitoring", "Fully automated pipeline", "Zero manual errors", "24/7 operation"],
+  
+    workflow: [
+      "خوراک RSS",
+      "استخراج اطلاعات",
+      "پردازش با هوش مصنوعی",
+      "ترجمه",
+      "خلاصه‌سازی",
+      "پایگاه داده",
+      "انتشار",
+    ],
+  
+    architecture: [
+      "منابع داده",
+      "موتور اتوماسیون",
+      "پردازش هوش مصنوعی",
+      "PostgreSQL",
+      "کانال‌های انتشار",
+    ],
+  
+    before: [
+      "بیش از ۵ ساعت کار روزانه",
+      "ترجمه و بررسی کیفیت به‌صورت دستی",
+      "خطاهای انسانی در قالب‌بندی و انتشار",
+      "مقیاس‌پذیری محدود",
+    ],
+  
+    after: [
+      "تنها ۱۰ دقیقه نظارت روزانه",
+      "گردش‌کار کاملاً خودکار",
+      "حذف کامل خطاهای انسانی",
+      "فعالیت ۲۴ ساعته در تمام روزهای هفته",
+    ],
+  
     impact: [
-      "Reduced editorial workload by 92%",
-      "Publishing speed increased 18×",
-      "Zero manual publishing errors in 4 months",
-      "Enabled 24/7 news coverage without staff",
+      "کاهش ۹۲ درصدی حجم کار تیم تولید محتوا",
+      "۱۸ برابر شدن سرعت انتشار اخبار",
+      "صفر خطای انتشار دستی در طول ۴ ماه",
+      "امکان پوشش ۲۴ ساعته اخبار بدون نیاز به نیروی انسانی",
     ],
+  
     timeline: [
-      { day: "Day 1", title: "Architecture", detail: "Data model, source list, workflow blueprint" },
-      { day: "Day 2", title: "Workflow build", detail: "n8n nodes, scraper, AI prompt engineering" },
-      { day: "Day 3", title: "Integration", detail: "PostgreSQL, WordPress, Telegram connectors" },
-      { day: "Day 4", title: "Testing & deploy", detail: "QA, monitoring, Docker deployment" },
+      {
+        day: "روز اول",
+        title: "طراحی معماری",
+        detail: "طراحی مدل داده، تعیین منابع و تهیه نقشه کامل گردش‌کار",
+      },
+      {
+        day: "روز دوم",
+        title: "پیاده‌سازی گردش‌کار",
+        detail: "ساخت نودهای n8n، توسعه اسکرپر و طراحی پرامپت‌های هوش مصنوعی",
+      },
+      {
+        day: "روز سوم",
+        title: "یکپارچه‌سازی",
+        detail: "اتصال PostgreSQL، وردپرس و تلگرام به سیستم",
+      },
+      {
+        day: "روز چهارم",
+        title: "تست و استقرار",
+        detail: "انجام تست نهایی، راه‌اندازی مانیتورینگ و استقرار با Docker",
+      },
     ],
-    liveStatus: { label: "Last execution", value: "2 minutes ago" },
+  
+    liveStatus: {
+      label: "آخرین اجرا",
+      value: "۲ دقیقه پیش",
+    },
+    gallery: [
+      {
+        src: "../src/images/Space_87_OBGA.AdobeStock_474813328_Space.jpg",
+        title: "Workflow",
+        alt: "n8n Workflow",
+      },
+      {
+        src: "../src/images/Space_87_OBGA.AdobeStock_474813328_Space.jpg",
+        title: "Database",
+        alt: "PostgreSQL",
+      },
+      {
+        src: "../src/images/Space_87_OBGA.AdobeStock_474813328_Space.jpg",
+        title: "Telegram",
+        alt: "Telegram Bot",
+      },
+      {
+        src:  "../src/images/Space_87_OBGA.AdobeStock_474813328_Space.jpg",
+        title: "Dashboard",
+        alt: "Analytics Dashboard",
+      },
+    ],
   },
   {
     slug: "ecommerce-product-scraper",
-    title: "E-commerce Product Intelligence",
-    tagline: "Track competitor pricing across 12 marketplaces in real time.",
+  
+    title: "سیستم تحلیل محصولات فروشگاه‌های اینترنتی",
+  
+    tagline: "پایش لحظه‌ای قیمت رقبا در ۱۲ مارکت‌پلیس مختلف.",
+  
     summary:
-      "A distributed scraper that monitors product prices, stock, and reviews across 12 marketplaces, enriches data with AI classification, and pushes insights to a live dashboard.",
-    category: "Web Scraping",
-    technologies: ["n8n", "Python", "Playwright", "PostgreSQL", "OpenAI", "Grafana"],
+      "یک سیستم اسکرپینگ توزیع‌شده که قیمت محصولات، موجودی و نظرات کاربران را در ۱۲ مارکت‌پلیس به‌صورت لحظه‌ای پایش می‌کند، داده‌ها را با کمک هوش مصنوعی دسته‌بندی و غنی‌سازی کرده و نتایج را در یک داشبورد زنده نمایش می‌دهد.",
+  
+    category: "وب اسکرپینگ",
+  
+    technologies: [
+      "n8n",
+      "Python",
+      "Playwright",
+      "PostgreSQL",
+      "OpenAI",
+      "Grafana",
+    ],
+  
     complexity: 5,
     aiLevel: 4,
     automationLevel: 5,
     businessImpact: 5,
+  
     status: "Live",
+  
     createdAt: "2025-06-04",
-    metrics: { tasksExecuted: 4500, hoursSaved: 620, costReduction: 5400, successRate: 98.9 },
+  
+    metrics: {
+      tasksExecuted: 4500,
+      hoursSaved: 620,
+      costReduction: 5400,
+      successRate: 98.9,
+    },
+  
     problem: [
-      "Analysts manually checked competitor prices weekly",
-      "Data was stale within hours of collection",
-      "No unified view across marketplaces",
-      "Impossible to react to price changes fast enough",
+      "تحلیل‌گران هر هفته قیمت رقبا را به‌صورت دستی بررسی می‌کردند.",
+      "داده‌ها تنها چند ساعت پس از جمع‌آوری قدیمی و غیرقابل اعتماد می‌شدند.",
+      "نمای یکپارچه‌ای از تمامی مارکت‌پلیس‌ها وجود نداشت.",
+      "واکنش سریع به تغییرات قیمت رقبا تقریباً غیرممکن بود.",
     ],
-    workflow: ["Scheduler", "Playwright Scraper", "Data Cleaner", "AI Classifier", "PostgreSQL", "Dashboard"],
-    architecture: ["Marketplace APIs", "Scraper Fleet", "AI Enrichment", "Warehouse", "Grafana Dashboards"],
-    before: ["Weekly manual checks", "Stale, incomplete data", "Reactive pricing decisions", "No historic trends"],
-    after: ["Real-time monitoring", "12 marketplaces unified", "Automated price alerts", "Full historic archive"],
+  
+    workflow: [
+      "زمان‌بندی اجرا",
+      "اسکرپر Playwright",
+      "پاک‌سازی داده‌ها",
+      "دسته‌بندی با هوش مصنوعی",
+      "PostgreSQL",
+      "داشبورد",
+    ],
+  
+    architecture: [
+      "APIهای مارکت‌پلیس",
+      "ناوگان اسکرپرها",
+      "غنی‌سازی با هوش مصنوعی",
+      "انبار داده",
+      "داشبوردهای Grafana",
+    ],
+  
+    before: [
+      "بررسی هفتگی به‌صورت دستی",
+      "داده‌های قدیمی و ناقص",
+      "تصمیم‌گیری واکنشی درباره قیمت‌ها",
+      "عدم دسترسی به روندهای تاریخی",
+    ],
+  
+    after: [
+      "پایش لحظه‌ای قیمت‌ها",
+      "تجمیع اطلاعات ۱۲ مارکت‌پلیس",
+      "هشدارهای خودکار تغییر قیمت",
+      "آرشیو کامل داده‌های تاریخی",
+    ],
+  
     impact: [
-      "Detected 340+ pricing opportunities/month",
-      "Cut competitive research time by 95%",
-      "Enabled dynamic pricing strategy",
-      "Recovered $54k in margin in first quarter",
+      "شناسایی بیش از ۳۴۰ فرصت قیمت‌گذاری در هر ماه",
+      "کاهش ۹۵ درصدی زمان تحلیل رقبا",
+      "امکان پیاده‌سازی استراتژی قیمت‌گذاری پویا",
+      "بازیابی بیش از ۵۴ هزار دلار سود در سه‌ماهه نخست",
     ],
+  
     timeline: [
-      { day: "Week 1", title: "Discovery", detail: "Source mapping, anti-bot analysis" },
-      { day: "Week 2", title: "Scraper build", detail: "Playwright fleet with rotation" },
-      { day: "Week 3", title: "AI enrichment", detail: "Classification, deduplication" },
-      { day: "Week 4", title: "Dashboards", detail: "Grafana panels, alerting" },
+      {
+        day: "هفته اول",
+        title: "تحلیل و بررسی",
+        detail: "شناسایی منابع داده و تحلیل سیستم‌های ضد ربات",
+      },
+      {
+        day: "هفته دوم",
+        title: "توسعه اسکرپر",
+        detail: "پیاده‌سازی ناوگان Playwright با سیستم چرخش IP و مرورگر",
+      },
+      {
+        day: "هفته سوم",
+        title: "غنی‌سازی با هوش مصنوعی",
+        detail: "دسته‌بندی محصولات، حذف داده‌های تکراری و پردازش هوشمند",
+      },
+      {
+        day: "هفته چهارم",
+        title: "داشبوردها",
+        detail: "طراحی پنل‌های Grafana و سیستم هشداردهی",
+      },
     ],
-    liveStatus: { label: "Processed", value: "4,500 products" },
+  
+    liveStatus: {
+      label: "پردازش شده",
+      value: "۴٬۵۰۰ محصول",
+    },
   },
   {
     slug: "seo-content-agent",
-    title: "SEO Content Agent",
-    tagline: "Autonomous writer: keyword research → outline → draft → publish.",
+  
+    title: "عامل هوشمند تولید محتوای سئو",
+  
+    tagline: "اتوماسیون کامل تولید محتوا: تحقیق کلمات کلیدی → ساختار مقاله → نگارش → انتشار.",
+  
     summary:
-      "An AI agent that researches keywords, generates SEO-optimized articles with citations, runs quality checks, and schedules publication across multiple CMS platforms.",
-    category: "Content Automation",
-    technologies: ["n8n", "OpenAI", "Anthropic", "SerpAPI", "WordPress", "Notion"],
+      "یک عامل هوش مصنوعی که کلمات کلیدی را تحقیق می‌کند، مقالات سئو شده همراه با استناد تولید می‌کند، بررسی‌های کیفی را انجام می‌دهد و انتشار محتوا را در چندین سیستم مدیریت محتوا (CMS) به‌صورت خودکار زمان‌بندی می‌کند.",
+  
+    category: "اتوماسیون تولید محتوا",
+  
+    technologies: [
+      "n8n",
+      "OpenAI",
+      "Anthropic",
+      "SerpAPI",
+      "WordPress",
+      "Notion",
+    ],
+  
     complexity: 4,
     aiLevel: 5,
     automationLevel: 4,
     businessImpact: 5,
+  
     status: "Live",
+  
     createdAt: "2025-09-20",
-    metrics: { tasksExecuted: 1240, hoursSaved: 480, costReduction: 8200, successRate: 96.5 },
+  
+    metrics: {
+      tasksExecuted: 1240,
+      hoursSaved: 480,
+      costReduction: 8200,
+      successRate: 96.5,
+    },
+  
     problem: [
-      "Content team bottlenecked at 8 articles/month",
-      "SEO research consumed 60% of writer time",
-      "Inconsistent quality across authors",
-      "No systematic keyword coverage",
+      "تیم تولید محتوا حداکثر توانایی انتشار ۸ مقاله در ماه را داشت.",
+      "تحقیق کلمات کلیدی حدود ۶۰ درصد از زمان نویسندگان را به خود اختصاص می‌داد.",
+      "کیفیت محتوا بین نویسندگان مختلف یکسان نبود.",
+      "پوشش منظم و هدفمند کلمات کلیدی وجود نداشت.",
     ],
-    workflow: ["Keyword Research", "Outline Agent", "Draft Agent", "QA Agent", "SEO Score", "Publish"],
-    architecture: ["Keyword APIs", "Multi-Agent LLM", "Fact Checker", "CMS", "Analytics Loop"],
-    before: ["8 articles/month", "Manual keyword research", "Inconsistent quality", "No scale"],
-    after: ["120 articles/month", "Automated research", "Consistent brand voice", "Fully scalable"],
+  
+    workflow: [
+      "تحقیق کلمات کلیدی",
+      "عامل طراحی ساختار مقاله",
+      "عامل نگارش محتوا",
+      "عامل کنترل کیفیت",
+      "امتیازدهی سئو",
+      "انتشار",
+    ],
+  
+    architecture: [
+      "APIهای تحقیق کلمات کلیدی",
+      "مدل چندعاملی هوش مصنوعی (LLM)",
+      "بررسی صحت اطلاعات",
+      "سیستم مدیریت محتوا (CMS)",
+      "حلقه تحلیل و بهینه‌سازی",
+    ],
+  
+    before: [
+      "۸ مقاله در ماه",
+      "تحقیق دستی کلمات کلیدی",
+      "کیفیت ناهماهنگ محتوا",
+      "عدم مقیاس‌پذیری",
+    ],
+  
+    after: [
+      "۱۲۰ مقاله در ماه",
+      "تحقیق خودکار کلمات کلیدی",
+      "یکپارچگی در لحن و کیفیت برند",
+      "مقیاس‌پذیری کامل",
+    ],
+  
     impact: [
-      "15× content output at same cost",
-      "Organic traffic +240% in 90 days",
-      "Editorial time redirected to strategy",
-      "Positive ROI within first month",
+      "۱۵ برابر افزایش تولید محتوا با همان هزینه",
+      "افزایش ۲۴۰ درصدی ترافیک ارگانیک در ۹۰ روز",
+      "تمرکز تیم تولید محتوا بر استراتژی به‌جای کارهای تکراری",
+      "بازگشت سرمایه مثبت از همان ماه اول",
     ],
+  
     timeline: [
-      { day: "Day 1-2", title: "Prompt design", detail: "Agent roles, brand voice" },
-      { day: "Day 3-4", title: "Pipeline", detail: "Multi-step n8n workflow" },
-      { day: "Day 5", title: "QA layer", detail: "Fact-checking, SEO scoring" },
-      { day: "Day 6", title: "Launch", detail: "CMS integration, monitoring" },
+      {
+        day: "روز ۱ تا ۲",
+        title: "طراحی پرامپت‌ها",
+        detail: "تعریف نقش عامل‌ها و لحن برند",
+      },
+      {
+        day: "روز ۳ تا ۴",
+        title: "پیاده‌سازی پایپ‌لاین",
+        detail: "طراحی گردش‌کار چندمرحله‌ای در n8n",
+      },
+      {
+        day: "روز ۵",
+        title: "لایه کنترل کیفیت",
+        detail: "بررسی صحت اطلاعات و امتیازدهی سئو",
+      },
+      {
+        day: "روز ۶",
+        title: "راه‌اندازی نهایی",
+        detail: "اتصال به CMS و راه‌اندازی سیستم مانیتورینگ",
+      },
     ],
-    liveStatus: { label: "Generated", value: "120 articles" },
+  
+    liveStatus: {
+      label: "تولید شده",
+      value: "۱۲۰ مقاله",
+    },
   },
   {
+  slug: "ecommerce-product-import-automation",
+
+  title: "اتوماسیون هوشمند واردسازی و همگام‌سازی محصولات فروشگاه",
+
+  tagline:
+    "ورود، بروزرسانی و مدیریت بیش از ۲۰,۰۰۰ محصول به‌صورت کاملاً خودکار با استفاده از API.",
+
+  summary:
+    "یک سیستم اتوماسیون مبتنی بر n8n که اطلاعات محصولات را از API تأمین‌کننده دریافت می‌کند، تصاویر، قیمت، موجودی و مشخصات را پردازش کرده و به‌صورت خودکار در فروشگاه ثبت می‌کند. این سیستم همچنین بروزرسانی مداوم قیمت و موجودی هزاران محصول را بدون دخالت نیروی انسانی انجام می‌دهد و فرآیند مدیریت فروشگاه را از چندین ماه کار دستی به تنها چند روز کاهش داده است.",
+
+  category: "اتوماسیون فروشگاه اینترنتی",
+
+  technologies: [
+    "n8n",
+    "REST API",
+    "WordPress",
+    "WooCommerce",
+    "JSON",
+    "HTTP Requests",
+  ],
+
+  complexity: 5,
+  aiLevel: 2,
+  automationLevel: 5,
+  businessImpact: 5,
+
+  status: "Live",
+
+  createdAt: "2026-01-12",
+
+  metrics: {
+    tasksExecuted: 40000,
+    hoursSaved: 720,
+    costReduction: 15000,
+    successRate: 99.2,
+  },
+
+  problem: [
+    "ورود بیش از ۲۰,۰۰۰ محصول به فروشگاه به‌صورت دستی چندین ماه زمان نیاز داشت.",
+    "بروزرسانی قیمت و موجودی هزاران محصول به‌صورت روزانه تقریباً غیرممکن بود.",
+    "احتمال خطای انسانی در ثبت اطلاعات، تصاویر و قیمت محصولات بسیار بالا بود.",
+    "هماهنگ نگه داشتن فروشگاه با اطلاعات تأمین‌کننده زمان و هزینه زیادی ایجاد می‌کرد.",
+  ],
+
+  workflow: [
+    "دریافت اطلاعات محصولات از API",
+    "اعتبارسنجی داده‌ها",
+    "پردازش تصاویر محصولات",
+    "ایجاد یا بروزرسانی محصولات",
+    "ثبت قیمت و موجودی",
+    "دسته‌بندی محصولات",
+    "گزارش‌گیری و مانیتورینگ",
+    "بروزرسانی خودکار قیمت و موجودی",
+  ],
+
+  architecture: [
+    "Supplier API",
+    "n8n Automation Engine",
+    "پردازش داده و اعتبارسنجی",
+    "WooCommerce REST API",
+    "Image Processing Pipeline",
+    "Logging & Monitoring",
+  ],
+
+  before: [
+    "چندین ماه ورود اطلاعات دستی",
+    "بروزرسانی دستی قیمت‌ها",
+    "ثبت دستی تصاویر",
+    "احتمال زیاد خطای انسانی",
+  ],
+
+  after: [
+    "ورود بیش از ۲۰,۰۰۰ محصول در کمتر از یک هفته",
+    "بروزرسانی خودکار قیمت و موجودی",
+    "افزودن خودکار تصاویر محصولات",
+    "هماهنگی دائمی فروشگاه با API تأمین‌کننده",
+  ],
+
+  impact: [
+    "کاهش زمان ورود اطلاعات از چندین ماه به کمتر از یک هفته",
+    "صرفه‌جویی صدها ساعت نیروی انسانی",
+    "حذف تقریباً کامل خطاهای ثبت اطلاعات",
+    "بروزرسانی خودکار بیش از ۲۰,۰۰۰ محصول بدون نیاز به اپراتور",
+    "افزایش سرعت عرضه محصولات جدید در فروشگاه",
+    "مقیاس‌پذیری کامل برای افزایش تعداد محصولات در آینده",
+  ],
+
+  timeline: [
+    {
+      day: "روز ۱",
+      title: "تحلیل API",
+      detail:
+        "بررسی ساختار داده‌ها، احراز هویت و طراحی معماری گردش‌کار",
+    },
+    {
+      day: "روز ۲ تا ۳",
+      title: "پیاده‌سازی سیستم واردسازی",
+      detail:
+        "طراحی Workflow برای دریافت اطلاعات، تصاویر و ایجاد محصولات",
+    },
+    {
+      day: "روز ۴ تا ۵",
+      title: "بهینه‌سازی و مدیریت خطا",
+      detail:
+        "مدیریت Rate Limit، Retry، لاگ‌گیری و جلوگیری از ایجاد داده تکراری",
+    },
+    {
+      day: "روز ۶ تا ۷",
+      title: "راه‌اندازی سیستم بروزرسانی",
+      detail:
+        "اتوماسیون بروزرسانی قیمت و موجودی بیش از ۲۰,۰۰۰ محصول",
+    },
+  ],
+
+  liveStatus: {
+    label: "محصولات مدیریت‌شده",
+    value: "۲۰,۰۰۰+ محصول",
+  },
+},
+{
+  slug: "logistics-load-planning-bot",
+
+  title: "سیستم هوشمند برنامه‌ریزی بارگیری و تخصیص ناوگان",
+
+  tagline:
+    "تحلیل سفارش‌ها، محاسبه تعداد کامیون‌های موردنیاز و ارسال خودکار برنامه بارگیری به رانندگان.",
+
+  summary:
+    "یک سیستم هوشمند مبتنی بر Telegram Bot که لیست سفارش محصولات را دریافت می‌کند، ظرفیت هر کامیون را بر اساس ابعاد و تعداد محصولات تحلیل می‌کند، تعداد خودروهای موردنیاز را محاسبه کرده و برنامه کامل بارگیری را به‌صورت خودکار برای رانندگان از طریق واتساپ ارسال می‌کند. این سیستم فرآیند برنامه‌ریزی لجستیک را از چند ساعت محاسبات دستی به چند ثانیه کاهش داده و احتمال خطا در ارسال بار را تقریباً از بین برده است.",
+
+  category: "اتوماسیون لجستیک و حمل‌ونقل",
+
+  technologies: [
+    "Telegram Bot API",
+    "n8n",
+    "WhatsApp API",
+    "REST API",
+    "JavaScript",
+    "JSON",
+  ],
+
+  complexity: 5,
+  aiLevel: 2,
+  automationLevel: 5,
+  businessImpact: 5,
+
+  status: "Live",
+
+  createdAt: "2025-11-18",
+
+  metrics: {
+    tasksExecuted: 18000,
+    hoursSaved: 950,
+    costReduction: 22000,
+    successRate: 99.6,
+  },
+
+  problem: [
+    "برنامه‌ریزی بارگیری برای سفارش‌های بزرگ به‌صورت دستی انجام می‌شد.",
+    "محاسبه ظرفیت کامیون‌ها زمان زیادی از تیم لجستیک می‌گرفت.",
+    "احتمال خطا در تعداد خودروهای موردنیاز و نحوه بارگیری بالا بود.",
+    "ارسال اطلاعات بارگیری به رانندگان به‌صورت دستی انجام می‌شد و باعث تأخیر می‌شد.",
+  ],
+
+  workflow: [
+    "دریافت لیست سفارش از تلگرام",
+    "تحلیل تعداد و مدل محصولات",
+    "محاسبه ظرفیت هر کامیون",
+    "تعیین تعداد خودروهای موردنیاز",
+    "تخصیص محصولات به هر کامیون",
+    "تولید گزارش بارگیری",
+    "ارسال اطلاعات کامل برای رانندگان در واتساپ",
+    "ثبت گزارش عملیات",
+  ],
+
+  architecture: [
+    "Telegram Bot",
+    "Workflow Engine (n8n)",
+    "Load Planning Engine",
+    "Capacity Calculation",
+    "WhatsApp API",
+    "Logging & Monitoring",
+  ],
+
+  before: [
+    "محاسبات دستی ظرفیت کامیون‌ها",
+    "نیاز به چند ساعت برنامه‌ریزی",
+    "احتمال خطای انسانی",
+    "ارسال دستی اطلاعات برای رانندگان",
+  ],
+
+  after: [
+    "محاسبه خودکار تعداد کامیون‌ها",
+    "تخصیص دقیق محصولات به هر خودرو",
+    "ارسال خودکار اطلاعات به رانندگان",
+    "اجرای کل فرآیند در کمتر از چند دقیقه",
+  ],
+
+  impact: [
+    "کاهش زمان برنامه‌ریزی لجستیک از چند ساعت به چند دقیقه",
+    "کاهش چشمگیر خطاهای تخصیص بار",
+    "افزایش سرعت آماده‌سازی سفارش‌ها",
+    "ارسال خودکار اطلاعات بارگیری به رانندگان",
+    "کاهش هزینه‌های عملیاتی واحد حمل‌ونقل",
+    "قابلیت مدیریت هم‌زمان تعداد زیادی سفارش",
+  ],
+
+  timeline: [
+    {
+      day: "روز ۱",
+      title: "تحلیل فرآیند لجستیک",
+      detail:
+        "بررسی قوانین بارگیری، ظرفیت خودروها و نیازهای واحد حمل‌ونقل",
+    },
+    {
+      day: "روز ۲ تا ۳",
+      title: "پیاده‌سازی موتور تحلیل بار",
+      detail:
+        "طراحی الگوریتم تخصیص محصولات به کامیون‌ها و محاسبه ظرفیت",
+    },
+    {
+      day: "روز ۴",
+      title: "اتصال ربات تلگرام",
+      detail:
+        "دریافت سفارش‌ها و اجرای خودکار فرآیند تحلیل",
+    },
+    {
+      day: "روز ۵",
+      title: "اتصال واتساپ",
+      detail:
+        "ارسال برنامه کامل بارگیری و مشخصات هر کامیون برای رانندگان",
+    },
+    {
+      day: "روز ۶",
+      title: "تست نهایی",
+      detail:
+        "اعتبارسنجی محاسبات و بهینه‌سازی سرعت پردازش سفارش‌ها",
+    },
+  ],
+
+  liveStatus: {
+    label: "وضعیت سیستم",
+    value: "اتوماسیون برنامه‌ریزی بارگیری",
+  },
+},
+{
+  slug: "smart-classifieds-aggregator",
+
+  title: "پلتفرم هوشمند تجمیع و توزیع آگهی‌ها",
+
+  tagline:
+    "جمع‌آوری لحظه‌ای آگهی‌ها از چندین مرجع، فیلتر هوشمند و ارسال شخصی‌سازی‌شده برای کاربران.",
+
+  summary:
+    "یک سیستم اتوماسیون مبتنی بر n8n که آگهی‌های جدید را به‌صورت لحظه‌ای از چندین وب‌سایت مرجع دریافت می‌کند، اطلاعات را پردازش و دسته‌بندی کرده و پس از حذف موارد تکراری، آن‌ها را در کانال تلگرام منتشر می‌کند. علاوه بر این، کاربران از طریق ربات تلگرام علاقه‌مندی‌های خود را ثبت می‌کنند و سیستم به‌صورت هوشمند تنها آگهی‌های مرتبط با علایق هر کاربر را به‌صورت شخصی‌سازی‌شده برای او ارسال می‌کند.",
+
+  category: "اتوماسیون جمع‌آوری اطلاعات",
+
+  technologies: [
+    "n8n",
+    "Telegram Bot API",
+    "Web Scraping",
+    "REST API",
+    "JavaScript",
+    "PostgreSQL",
+    "Cron Jobs",
+  ],
+
+  complexity: 5,
+  aiLevel: 2,
+  automationLevel: 5,
+  businessImpact: 5,
+
+  status: "Live",
+
+  createdAt: "2025-10-08",
+
+  metrics: {
+    tasksExecuted: 320000,
+    hoursSaved: 1400,
+    costReduction: 18000,
+    successRate: 99.3,
+  },
+
+  problem: [
+    "کاربران برای یافتن آگهی‌های جدید باید چندین وب‌سایت را به‌صورت مداوم بررسی می‌کردند.",
+    "امکان دریافت سریع آگهی‌های جدید وجود نداشت.",
+    "بخش زیادی از آگهی‌ها برای کاربران مرتبط نبود.",
+    "پیگیری هم‌زمان چندین منبع باعث اتلاف زمان می‌شد.",
+  ],
+
+  workflow: [
+    "پایش مداوم وب‌سایت‌های مرجع",
+    "استخراج آگهی‌های جدید",
+    "حذف آگهی‌های تکراری",
+    "استانداردسازی اطلاعات",
+    "انتشار در کانال تلگرام",
+    "ثبت علاقه‌مندی کاربران",
+    "تطبیق آگهی‌ها با علایق کاربران",
+    "ارسال شخصی‌سازی‌شده از طریق ربات تلگرام",
+    "ثبت گزارش و مانیتورینگ",
+  ],
+
+  architecture: [
+    "Multi Source Scraper",
+    "n8n Workflow Engine",
+    "Duplicate Detection",
+    "PostgreSQL",
+    "Telegram Channel",
+    "Telegram Bot",
+    "Notification Engine",
+  ],
+
+  before: [
+    "بررسی دستی چندین سایت",
+    "از دست رفتن آگهی‌های مهم",
+    "عدم شخصی‌سازی اطلاعات",
+    "اتلاف زمان کاربران",
+  ],
+
+  after: [
+    "تجمیع خودکار آگهی‌ها",
+    "انتشار لحظه‌ای در تلگرام",
+    "ارسال آگهی‌های مرتبط برای هر کاربر",
+    "عدم نیاز به بررسی دستی وب‌سایت‌ها",
+  ],
+
+  impact: [
+    "تجمیع چندین منبع در یک پلتفرم واحد",
+    "کاهش زمان جستجوی آگهی‌ها به نزدیک صفر",
+    "ارسال هدفمند آگهی‌ها براساس علاقه‌مندی کاربران",
+    "افزایش تعامل کاربران با سیستم",
+    "حذف آگهی‌های تکراری و افزایش کیفیت اطلاعات",
+    "قابلیت توسعه و اتصال به منابع جدید بدون تغییر ساختار سیستم",
+  ],
+
+  timeline: [
+    {
+      day: "روز ۱",
+      title: "تحلیل منابع",
+      detail:
+        "بررسی ساختار سه وب‌سایت مرجع و طراحی فرآیند استخراج اطلاعات",
+    },
+    {
+      day: "روز ۲ تا ۳",
+      title: "پیاده‌سازی سیستم جمع‌آوری",
+      detail:
+        "توسعه Workflow برای دریافت، پردازش و حذف آگهی‌های تکراری",
+    },
+    {
+      day: "روز ۴",
+      title: "راه‌اندازی کانال تلگرام",
+      detail:
+        "انتشار خودکار آگهی‌ها با قالب‌بندی استاندارد",
+    },
+    {
+      day: "روز ۵",
+      title: "سیستم شخصی‌سازی",
+      detail:
+        "ثبت علاقه‌مندی کاربران و ارسال هدفمند آگهی‌ها از طریق ربات تلگرام",
+    },
+    {
+      day: "روز ۶",
+      title: "مانیتورینگ و بهینه‌سازی",
+      detail:
+        "مدیریت خطاها، ثبت لاگ و بهینه‌سازی زمان‌بندی پردازش",
+    },
+  ],
+
+  liveStatus: {
+    label: "وضعیت سیستم",
+    value: "پایش لحظه‌ای ۳ منبع",
+  },
+},
+{
+  slug: "telegram-subscription-management",
+
+  title: "سیستم هوشمند مدیریت اشتراک تلگرام",
+
+  tagline:
+    "اتوماسیون کامل خرید اشتراک، مدیریت دسترسی کاربران و تمدید خودکار عضویت.",
+
+  summary:
+    "یک پلتفرم مدیریت اشتراک مبتنی بر Telegram Bot که فرآیند خرید، پرداخت، فعال‌سازی و تمدید اشتراک کاربران را به‌صورت کاملاً خودکار مدیریت می‌کند. پس از پرداخت موفق، کاربر به کانال VIP اضافه می‌شود، مدت اعتبار اشتراک ثبت می‌شود، یک هفته پیش از انقضا پیام یادآوری تمدید دریافت می‌کند و در صورت عدم تمدید، دسترسی او به‌صورت خودکار لغو خواهد شد.",
+
+  category: "اتوماسیون مدیریت اشتراک",
+
+  technologies: [
+    "Telegram Bot API",
+    "n8n",
+    "Payment Gateway API",
+    "PostgreSQL",
+    "REST API",
+    "Cron Jobs",
+  ],
+
+  complexity: 4,
+  aiLevel: 1,
+  automationLevel: 5,
+  businessImpact: 5,
+
+  status: "Live",
+
+  createdAt: "2025-08-15",
+
+  metrics: {
+    tasksExecuted: 28000,
+    hoursSaved: 650,
+    costReduction: 12000,
+    successRate: 99.8,
+  },
+
+  problem: [
+    "مدیریت دستی اعضای VIP زمان‌بر و مستعد خطا بود.",
+    "افزودن و حذف کاربران از کانال به‌صورت دستی انجام می‌شد.",
+    "پیگیری تاریخ انقضای اشتراک کاربران دشوار بود.",
+    "بسیاری از کاربران به دلیل فراموشی، اشتراک خود را تمدید نمی‌کردند.",
+  ],
+
+  workflow: [
+    "ثبت‌نام کاربر",
+    "انتخاب پلن اشتراک",
+    "پرداخت آنلاین",
+    "تأیید تراکنش",
+    "فعال‌سازی اشتراک",
+    "افزودن خودکار به کانال VIP",
+    "ثبت تاریخ انقضا",
+    "ارسال یادآوری تمدید یک هفته قبل از پایان اشتراک",
+    "تمدید اشتراک یا حذف خودکار از کانال",
+    "ثبت گزارش و مانیتورینگ",
+  ],
+
+  architecture: [
+    "Telegram Bot",
+    "Payment Gateway",
+    "Subscription Engine",
+    "Membership Database",
+    "Telegram Channel Manager",
+    "Scheduler & Reminder Service",
+  ],
+
+  before: [
+    "مدیریت دستی اعضای VIP",
+    "بررسی دستی تاریخ انقضای اشتراک",
+    "افزودن و حذف دستی کاربران",
+    "عدم وجود یادآوری تمدید",
+  ],
+
+  after: [
+    "مدیریت کاملاً خودکار اشتراک‌ها",
+    "افزودن و حذف خودکار کاربران",
+    "یادآوری هوشمند تمدید",
+    "مدیریت بدون دخالت اپراتور",
+  ],
+
+  impact: [
+    "حذف کامل مدیریت دستی کاربران VIP",
+    "کاهش چشمگیر خطاهای انسانی در مدیریت اشتراک",
+    "افزایش نرخ تمدید اشتراک با ارسال یادآوری خودکار",
+    "کاهش زمان پشتیبانی و مدیریت کاربران",
+    "قابلیت مدیریت هزاران کاربر به‌صورت هم‌زمان",
+    "مقیاس‌پذیری برای ایجاد پلن‌های اشتراک متنوع",
+  ],
+
+  timeline: [
+    {
+      day: "روز ۱",
+      title: "طراحی سیستم اشتراک",
+      detail:
+        "تعریف پلن‌ها، قوانین عضویت و چرخه عمر اشتراک",
+    },
+    {
+      day: "روز ۲",
+      title: "اتصال درگاه پرداخت",
+      detail:
+        "پیاده‌سازی پرداخت و تأیید خودکار تراکنش‌ها",
+    },
+    {
+      day: "روز ۳",
+      title: "مدیریت دسترسی",
+      detail:
+        "افزودن خودکار کاربران به کانال VIP و ثبت تاریخ انقضا",
+    },
+    {
+      day: "روز ۴",
+      title: "سیستم یادآوری",
+      detail:
+        "ارسال پیام تمدید یک هفته قبل از پایان اعتبار اشتراک",
+    },
+    {
+      day: "روز ۵",
+      title: "اتوماسیون پایان اشتراک",
+      detail:
+        "حذف خودکار کاربران منقضی‌شده و ثبت گزارش عملیات",
+    },
+  ],
+
+  liveStatus: {
+    label: "وضعیت سیستم",
+    value: "مدیریت خودکار اشتراک‌ها",
+  },
+},
+{
+  slug: "smart-product-seo-automation",
+
+  title: "سیستم هوشمند بهینه‌سازی سئوی محصولات فروشگاه",
+
+  tagline:
+    "تخصیص خودکار تگ‌های مرتبط به محصولات جدید برای افزایش دیده‌شدن در موتورهای جستجو و فروشگاه.",
+
+  summary:
+    "یک سیستم اتوماسیون مبتنی بر Webhook و n8n که بلافاصله پس از انتشار هر محصول جدید، اطلاعات آن را دریافت کرده، بر اساس دسته‌بندی و بانک تگ‌های از پیش تعریف‌شده، مناسب‌ترین برچسب‌ها را به محصول اختصاص می‌دهد. این فرآیند باعث افزایش کیفیت ساختار سئوی محصولات، بهبود قابلیت جستجو در فروشگاه و افزایش شانس نمایش محصولات به مشتریان می‌شود؛ بدون نیاز به هیچ‌گونه عملیات دستی.",
+
+  category: "اتوماسیون سئو فروشگاه",
+
+  technologies: [
+    "n8n",
+    "Webhook",
+    "REST API",
+    "WooCommerce",
+    "WordPress",
+    "JavaScript",
+    "JSON",
+  ],
+
+  complexity: 4,
+  aiLevel: 2,
+  automationLevel: 5,
+  businessImpact: 5,
+
+  status: "Live",
+
+  createdAt: "2025-12-05",
+
+  metrics: {
+    tasksExecuted: 95000,
+    hoursSaved: 420,
+    costReduction: 8000,
+    successRate: 99.8,
+  },
+
+  problem: [
+    "تگ‌گذاری محصولات به‌صورت دستی زمان‌بر بود.",
+    "بسیاری از محصولات بدون برچسب یا با تگ‌های نامناسب منتشر می‌شدند.",
+    "کیفیت سئوی محصولات در فروشگاه یکپارچه نبود.",
+    "کارشناسان محتوا زمان زیادی را صرف مدیریت تگ‌ها می‌کردند.",
+  ],
+
+  workflow: [
+    "انتشار محصول جدید",
+    "ارسال اطلاعات محصول به Webhook",
+    "تحلیل دسته‌بندی محصول",
+    "انتخاب تگ‌های مرتبط",
+    "بررسی تگ‌های تکراری",
+    "ثبت خودکار تگ‌ها روی محصول",
+    "ثبت گزارش عملیات",
+  ],
+
+  architecture: [
+    "Webhook",
+    "n8n Workflow Engine",
+    "Tag Mapping Engine",
+    "WooCommerce API",
+    "SEO Metadata Manager",
+    "Logging & Monitoring",
+  ],
+
+  before: [
+    "تگ‌گذاری دستی",
+    "عدم یکپارچگی در ساختار سئو",
+    "زمان زیاد برای انتشار محصولات",
+    "احتمال فراموش شدن برچسب‌ها",
+  ],
+
+  after: [
+    "تگ‌گذاری کاملاً خودکار",
+    "یکپارچگی در سئوی محصولات",
+    "انتشار سریع‌تر محصولات",
+    "افزایش کیفیت جستجو در فروشگاه",
+  ],
+
+  impact: [
+    "حذف کامل فرآیند دستی تگ‌گذاری",
+    "افزایش کیفیت سئوی محصولات",
+    "بهبود ساختار دسته‌بندی و ایندکس محصولات",
+    "افزایش شانس نمایش محصولات در نتایج جستجو",
+    "صرفه‌جویی صدها ساعت در مدیریت محتوای فروشگاه",
+    "امکان مقیاس‌پذیری برای هزاران محصول جدید",
+  ],
+
+  timeline: [
+    {
+      day: "روز ۱",
+      title: "تحلیل ساختار فروشگاه",
+      detail:
+        "بررسی دسته‌بندی محصولات و طراحی قوانین نگاشت تگ‌ها",
+    },
+    {
+      day: "روز ۲",
+      title: "پیاده‌سازی Webhook",
+      detail:
+        "دریافت خودکار اطلاعات محصولات پس از انتشار",
+    },
+    {
+      day: "روز ۳",
+      title: "موتور تخصیص تگ",
+      detail:
+        "پیاده‌سازی الگوریتم انتخاب و ثبت خودکار برچسب‌های مرتبط",
+    },
+    {
+      day: "روز ۴",
+      title: "بهینه‌سازی و مانیتورینگ",
+      detail:
+        "مدیریت خطاها، ثبت گزارش و بهینه‌سازی عملکرد سیستم",
+    },
+  ],
+
+  liveStatus: {
+    label: "وضعیت سیستم",
+    value: "تگ‌گذاری خودکار محصولات",
+  },
+},
+{
+  slug: "ai-subtitle-localization-platform",
+
+  title: "پلتفرم هوشمند ترجمه و بومی‌سازی زیرنویس",
+
+  tagline:
+    "سرویس SaaS برای ترجمه خودکار زیرنویس با پرداخت اعتباری، همگام‌سازی وب و تلگرام و تحویل آنی فایل.",
+
+  summary:
+    "یک پلتفرم SaaS شامل وب‌اپلیکیشن React، بک‌اند مبتنی بر n8n و ربات تلگرام که امکان ترجمه خودکار فایل‌های زیرنویس را بین زبان‌های مختلف فراهم می‌کند. کاربران می‌توانند از طریق وب یا تلگرام ثبت‌نام کنند، کیف پول خود را شارژ کنند، فایل زیرنویس را ارسال کرده و نسخه ترجمه‌شده را تنها در چند دقیقه دریافت کنند. اطلاعات کاربران، کیف پول و تاریخچه سفارش‌ها به‌صورت کامل بین وب‌سایت و ربات تلگرام همگام‌سازی می‌شود تا کاربر بتواند از هر دو پلتفرم بدون محدودیت استفاده کند.",
+
+  category: "پلتفرم SaaS مبتنی بر هوش مصنوعی",
+
+  technologies: [
+    "React",
+    "TypeScript",
+    "n8n",
+    "Telegram Bot API",
+    "OpenAI",
+    "REST API",
+    "PostgreSQL",
+    "Payment Gateway",
+  ],
+
+  complexity: 5,
+  aiLevel: 5,
+  automationLevel: 5,
+  businessImpact: 5,
+
+  status: "Live",
+
+  createdAt: "2026-02-20",
+
+  metrics: {
+    tasksExecuted: 58000,
+    hoursSaved: 2400,
+    costReduction: 35000,
+    successRate: 99.1,
+  },
+
+  problem: [
+    "ترجمه زیرنویس به زبان‌های مختلف فرآیندی زمان‌بر و پرهزینه بود.",
+    "کاربران برای سفارش ترجمه نیاز به ارتباط مستقیم با اپراتور داشتند.",
+    "مدیریت پرداخت و تحویل فایل‌ها به‌صورت دستی انجام می‌شد.",
+    "امکان استفاده هم‌زمان از وب و تلگرام وجود نداشت.",
+  ],
+
+  workflow: [
+    "ثبت‌نام از طریق وب یا تلگرام",
+    "همگام‌سازی حساب کاربری",
+    "شارژ کیف پول",
+    "بارگذاری فایل زیرنویس",
+    "تشخیص زبان",
+    "ترجمه با هوش مصنوعی",
+    "کسر اعتبار بر اساس میزان مصرف",
+    "تحویل فایل ترجمه‌شده",
+    "ثبت تاریخچه سفارش‌ها",
+  ],
+
+  architecture: [
+    "React Frontend",
+    "n8n Backend",
+    "Telegram Bot",
+    "Authentication Service",
+    "Wallet System",
+    "AI Translation Engine",
+    "Payment Gateway",
+    "PostgreSQL",
+  ],
+
+  before: [
+    "ترجمه دستی زیرنویس",
+    "مدیریت دستی سفارش‌ها",
+    "پرداخت سنتی",
+    "عدم وجود پنل کاربری",
+  ],
+
+  after: [
+    "ترجمه خودکار چندزبانه",
+    "تحویل فایل در چند دقیقه",
+    "کیف پول اعتباری",
+    "همگام‌سازی کامل وب و تلگرام",
+  ],
+
+  impact: [
+    "ایجاد یک سرویس SaaS با مدل درآمد Pay-as-you-go",
+    "حذف کامل فرآیندهای دستی ثبت سفارش",
+    "ارائه سرویس از طریق دو پلتفرم هم‌زمان",
+    "کاهش زمان تحویل فایل از چند ساعت به چند دقیقه",
+    "مقیاس‌پذیری برای هزاران کاربر هم‌زمان",
+    "مدیریت کامل چرخه سفارش، پرداخت و تحویل به‌صورت خودکار",
+  ],
+
+  timeline: [
+    {
+      day: "هفته اول",
+      title: "توسعه Frontend",
+      detail:
+        "پیاده‌سازی رابط کاربری React، ثبت‌نام، کیف پول و مدیریت سفارش‌ها",
+    },
+    {
+      day: "هفته دوم",
+      title: "توسعه Backend",
+      detail:
+        "طراحی Workflowهای n8n، احراز هویت، کیف پول و پردازش سفارش‌ها",
+    },
+    {
+      day: "هفته سوم",
+      title: "پیاده‌سازی موتور ترجمه",
+      detail:
+        "اتصال به مدل‌های هوش مصنوعی و پردازش فایل‌های SRT",
+    },
+    {
+      day: "هفته چهارم",
+      title: "یکپارچه‌سازی تلگرام",
+      detail:
+        "همگام‌سازی کاربران، سفارش‌ها، پرداخت و تحویل فایل بین وب و ربات",
+    },
+    {
+      day: "هفته پنجم",
+      title: "راه‌اندازی نهایی",
+      detail:
+        "بهینه‌سازی عملکرد، مانیتورینگ و آماده‌سازی برای استفاده عمومی",
+    },
+  ],
+
+  liveStatus: {
+    label: "وضعیت سیستم",
+    value: "سرویس SaaS فعال",
+  },
+},
+{
+  slug: "multi-vendor-commerce-automation",
+
+  title: "پلتفرم هوشمند همگام‌سازی محصولات و اتوماسیون سفارش",
+
+  tagline:
+    "تجمیع خودکار محصولات از چندین تأمین‌کننده، همگام‌سازی موجودی و اجرای سفارش‌ها بدون دخالت اپراتور.",
+
+  summary:
+    "یک پلتفرم تجارت الکترونیک که محصولات را از چندین تأمین‌کننده از طریق API دریافت و در فروشگاه منتشر می‌کند. سیستم به‌صورت مداوم قیمت، موجودی و اطلاعات محصولات را همگام‌سازی کرده و پس از ثبت سفارش مشتری، فرآیند ثبت سفارش نزد تأمین‌کننده را به‌صورت کاملاً خودکار انجام می‌دهد. علاوه بر اتوماسیون فروش، یک استراتژی تولید محتوای تخصصی و سئو نیز برای جذب ترافیک ارگانیک و افزایش نرخ تبدیل پیاده‌سازی شد.",
+
+  category: "اتوماسیون تجارت الکترونیک",
+
+  technologies: [
+    "n8n",
+    "REST API",
+    "WooCommerce",
+    "WordPress",
+    "PostgreSQL",
+    "JavaScript",
+    "Cron Jobs",
+  ],
+
+  complexity: 5,
+  aiLevel: 2,
+  automationLevel: 5,
+  businessImpact: 5,
+
+  status: "Live",
+
+  createdAt: "2025-07-15",
+
+  metrics: {
+    tasksExecuted: 650000,
+    hoursSaved: 1800,
+    costReduction: 42000,
+    successRate: 99.4,
+  },
+
+  problem: [
+    "مدیریت هزاران محصول از چندین تأمین‌کننده به‌صورت دستی امکان‌پذیر نبود.",
+    "قیمت و موجودی محصولات دائماً تغییر می‌کرد.",
+    "ثبت دستی سفارش نزد تأمین‌کننده باعث تأخیر و افزایش خطا می‌شد.",
+    "جذب مشتری از طریق تبلیغات هزینه بالایی داشت.",
+  ],
+
+  workflow: [
+    "دریافت اطلاعات محصولات از API تأمین‌کنندگان",
+    "همگام‌سازی قیمت و موجودی",
+    "انتشار خودکار محصولات در فروشگاه",
+    "بهینه‌سازی محتوای سئو",
+    "ثبت سفارش مشتری",
+    "ارسال خودکار سفارش به تأمین‌کننده",
+    "ثبت وضعیت سفارش",
+    "گزارش‌گیری و مانیتورینگ",
+  ],
+
+  architecture: [
+    "Supplier APIs",
+    "n8n Automation Engine",
+    "Inventory Synchronization",
+    "Pricing Engine",
+    "WooCommerce",
+    "Order Fulfillment Automation",
+    "SEO Content Pipeline",
+    "Monitoring & Logging",
+  ],
+
+  before: [
+    "ثبت دستی محصولات",
+    "به‌روزرسانی دستی قیمت‌ها",
+    "ثبت دستی سفارش‌ها",
+    "وابستگی به تبلیغات برای جذب مشتری",
+  ],
+
+  after: [
+    "همگام‌سازی خودکار هزاران محصول",
+    "به‌روزرسانی لحظه‌ای قیمت و موجودی",
+    "ثبت خودکار سفارش نزد تأمین‌کننده",
+    "جذب مشتری از طریق ترافیک ارگانیک",
+  ],
+
+  impact: [
+    "ایجاد یک فروشگاه با مدل تجارت مبتنی بر تأمین‌کنندگان متعدد (Multi-Vendor)",
+    "اتوماسیون کامل چرخه فروش از انتشار محصول تا ثبت سفارش",
+    "کاهش چشمگیر زمان مدیریت فروشگاه",
+    "امکان مدیریت هزاران محصول بدون افزایش نیروی انسانی",
+    "افزایش سود با اعمال حاشیه سود ثابت روی محصولات",
+    "افزایش ورودی ارگانیک از طریق انتشار محتوای تخصصی و سئو",
+  ],
+
+  businessModel: [
+    "همگام‌سازی محصولات از چندین تأمین‌کننده",
+    "اعمال حاشیه سود ثابت روی قیمت محصولات",
+    "جذب مشتری از طریق سئوی محتوایی",
+    "ثبت خودکار سفارش پس از خرید مشتری",
+  ],
+
+  timeline: [
+    {
+      day: "هفته اول",
+      title: "یکپارچه‌سازی تأمین‌کنندگان",
+      detail: "اتصال APIها و طراحی ساختار همگام‌سازی محصولات",
+    },
+    {
+      day: "هفته دوم",
+      title: "موتور همگام‌سازی",
+      detail: "پیاده‌سازی بروزرسانی خودکار قیمت و موجودی",
+    },
+    {
+      day: "هفته سوم",
+      title: "اتوماسیون سفارش",
+      detail: "ثبت خودکار سفارش نزد تأمین‌کننده و مدیریت وضعیت سفارش",
+    },
+    {
+      day: "هفته چهارم",
+      title: "استراتژی سئو",
+      detail: "انتشار محتوای تخصصی برای افزایش ترافیک ارگانیک فروشگاه",
+    },
+  ],
+
+  liveStatus: {
+    label: "وضعیت سیستم",
+    value: "فروشگاه خودکار چند تأمین‌کننده",
+  },
+},
+  {
     slug: "crm-lead-router",
-    title: "CRM Lead Router & Enricher",
-    tagline: "Inbound leads scored, enriched, and routed in under 3 seconds.",
+  
+    title: "سیستم هوشمند مدیریت و هدایت سرنخ‌های CRM",
+  
+    tagline: "دریافت، امتیازدهی، تکمیل اطلاعات و ارجاع سرنخ‌ها در کمتر از ۳ ثانیه.",
+  
     summary:
-      "Captures leads from 6 channels, enriches with firmographic data, scores using AI, and routes to the right sales rep with a personalized first-touch email.",
-    category: "CRM Automation",
-    technologies: ["n8n", "HubSpot", "Clearbit", "OpenAI", "Slack"],
+      "این سیستم سرنخ‌های ورودی را از ۶ کانال مختلف دریافت می‌کند، اطلاعات سازمانی آن‌ها را تکمیل می‌کند، با استفاده از هوش مصنوعی امتیازدهی انجام می‌دهد و هر سرنخ را همراه با یک ایمیل شخصی‌سازی‌شده به مناسب‌ترین کارشناس فروش ارجاع می‌دهد.",
+  
+    category: "اتوماسیون CRM",
+  
+    technologies: [
+      "n8n",
+      "HubSpot",
+      "Clearbit",
+      "OpenAI",
+      "Slack",
+    ],
+  
     complexity: 3,
     aiLevel: 4,
     automationLevel: 5,
     businessImpact: 5,
+  
     status: "Live",
+  
     createdAt: "2025-10-11",
-    metrics: { tasksExecuted: 8620, hoursSaved: 210, costReduction: 4100, successRate: 99.2 },
+  
+    metrics: {
+      tasksExecuted: 8620,
+      hoursSaved: 210,
+      costReduction: 4100,
+      successRate: 99.2,
+    },
+  
     problem: [
-      "Leads sat in inbox for hours before assignment",
-      "Reps wasted time on low-fit leads",
-      "No enrichment, no scoring, no personalization",
-      "Response time hurt conversion",
+      "سرنخ‌ها ساعت‌ها در صندوق ورودی بدون بررسی باقی می‌ماندند.",
+      "کارشناسان فروش زمان زیادی را صرف سرنخ‌های کم‌ارزش می‌کردند.",
+      "هیچ فرآیندی برای تکمیل اطلاعات، امتیازدهی یا شخصی‌سازی وجود نداشت.",
+      "زمان پاسخگویی بالا باعث کاهش نرخ تبدیل می‌شد.",
     ],
-    workflow: ["Capture", "Deduplicate", "Enrich", "AI Score", "Route", "Personalize", "Notify"],
-    architecture: ["Lead Sources", "Router", "Enrichment APIs", "AI Scoring", "CRM", "Slack"],
-    before: ["4h avg response", "No enrichment", "Random routing", "Generic emails"],
-    after: ["<3s response", "Full firmographics", "AI-scored routing", "Personalized outreach"],
+  
+    workflow: [
+      "دریافت سرنخ",
+      "حذف موارد تکراری",
+      "تکمیل اطلاعات",
+      "امتیازدهی با هوش مصنوعی",
+      "ارجاع سرنخ",
+      "شخصی‌سازی",
+      "ارسال اعلان",
+    ],
+  
+    architecture: [
+      "منابع دریافت سرنخ",
+      "موتور هدایت سرنخ",
+      "APIهای تکمیل اطلاعات",
+      "امتیازدهی هوشمند",
+      "سیستم CRM",
+      "Slack",
+    ],
+  
+    before: [
+      "میانگین پاسخگویی ۴ ساعت",
+      "بدون تکمیل اطلاعات",
+      "ارجاع تصادفی سرنخ‌ها",
+      "ایمیل‌های عمومی و غیرشخصی",
+    ],
+  
+    after: [
+      "پاسخگویی در کمتر از ۳ ثانیه",
+      "اطلاعات کامل سازمانی مشتری",
+      "ارجاع هوشمند بر اساس امتیاز AI",
+      "ارسال پیام و ایمیل شخصی‌سازی‌شده",
+    ],
+  
     impact: [
-      "Lead-to-meeting rate +68%",
-      "Sales reply time cut from hours to seconds",
-      "Reps focus only on qualified leads",
-      "Revenue attributed to automation: $180k",
+      "افزایش ۶۸ درصدی نرخ تبدیل سرنخ به جلسه فروش",
+      "کاهش زمان پاسخگویی از چند ساعت به چند ثانیه",
+      "تمرکز کارشناسان فروش فقط روی سرنخ‌های ارزشمند",
+      "ایجاد بیش از ۱۸۰ هزار دلار درآمد منتسب به اتوماسیون",
     ],
+  
     timeline: [
-      { day: "Day 1", title: "Scoping", detail: "Lead sources, ICP definition" },
-      { day: "Day 2", title: "Enrichment", detail: "Clearbit + custom scrapers" },
-      { day: "Day 3", title: "AI scoring", detail: "Prompt design, evaluation" },
-      { day: "Day 4", title: "Rollout", detail: "HubSpot workflows, Slack alerts" },
+      {
+        day: "روز اول",
+        title: "تحلیل نیازمندی‌ها",
+        detail: "شناسایی منابع سرنخ و تعریف مشتری ایده‌آل (ICP)",
+      },
+      {
+        day: "روز دوم",
+        title: "تکمیل اطلاعات",
+        detail: "اتصال Clearbit و توسعه اسکرپرهای اختصاصی",
+      },
+      {
+        day: "روز سوم",
+        title: "امتیازدهی هوشمند",
+        detail: "طراحی پرامپت‌ها و ارزیابی مدل هوش مصنوعی",
+      },
+      {
+        day: "روز چهارم",
+        title: "راه‌اندازی نهایی",
+        detail: "پیاده‌سازی گردش‌کار HubSpot و اعلان‌های Slack",
+      },
     ],
-    liveStatus: { label: "Leads routed today", value: "142" },
+  
+    liveStatus: {
+      label: "سرنخ‌های ارجاع‌شده امروز",
+      value: "۱۴۲",
+    },
   },
   {
     slug: "invoice-processing-agent",
-    title: "Invoice Processing Agent",
-    tagline: "OCR + LLM extraction: PDFs to accounting system, hands-free.",
+  
+    title: "عامل هوشمند پردازش فاکتورها",
+  
+    tagline: "استخراج اطلاعات از فایل‌های PDF با OCR و هوش مصنوعی و ثبت خودکار در سیستم حسابداری.",
+  
     summary:
-      "Reads incoming invoice PDFs from email, extracts structured data with OCR + LLM, validates against POs, and posts to the accounting system with human approval only on exceptions.",
-    category: "Data Processing",
-    technologies: ["n8n", "Tesseract", "OpenAI", "QuickBooks", "PostgreSQL"],
+      "این سیستم فاکتورهای PDF دریافتی از ایمیل را به‌صورت خودکار پردازش می‌کند، اطلاعات ساختاریافته را با استفاده از OCR و مدل‌های هوش مصنوعی استخراج می‌کند، آن‌ها را با سفارش‌های خرید (PO) تطبیق می‌دهد و در صورت نبود مغایرت، مستقیماً در سیستم حسابداری ثبت می‌کند. تنها موارد استثنا برای تأیید به نیروی انسانی ارجاع داده می‌شوند.",
+  
+    category: "پردازش داده",
+  
+    technologies: [
+      "n8n",
+      "Tesseract",
+      "OpenAI",
+      "QuickBooks",
+      "PostgreSQL",
+    ],
+  
     complexity: 4,
     aiLevel: 4,
     automationLevel: 5,
     businessImpact: 4,
+  
     status: "Live",
+  
     createdAt: "2025-07-02",
-    metrics: { tasksExecuted: 3200, hoursSaved: 390, costReduction: 6800, successRate: 97.8 },
+  
+    metrics: {
+      tasksExecuted: 3200,
+      hoursSaved: 390,
+      costReduction: 6800,
+      successRate: 97.8,
+    },
+  
     problem: [
-      "Bookkeeper manually entered 200+ invoices/week",
-      "Error rate around 4% caused reconciliation pain",
-      "PO matching was fully manual",
-      "Approvals took days",
+      "حسابدار هر هفته بیش از ۲۰۰ فاکتور را به‌صورت دستی ثبت می‌کرد.",
+      "نرخ خطای حدود ۴ درصد باعث ایجاد مشکلات در تطبیق حساب‌ها می‌شد.",
+      "تطبیق فاکتورها با سفارش‌های خرید (PO) کاملاً دستی انجام می‌شد.",
+      "فرآیند تأیید و ثبت فاکتورها چندین روز زمان می‌برد.",
     ],
-    workflow: ["Email Watcher", "OCR", "LLM Extract", "Validate", "Match PO", "Post to QB", "Notify"],
-    architecture: ["Email Inbox", "OCR Engine", "LLM Parser", "Validation Rules", "Accounting API"],
-    before: ["200 invoices manually", "4% error rate", "Slow PO matching", "Weekly close delays"],
-    after: ["Hands-free processing", "<0.5% exceptions", "Instant PO matching", "Daily close"],
+  
+    workflow: [
+      "پایش ایمیل",
+      "استخراج متن با OCR",
+      "استخراج اطلاعات با هوش مصنوعی",
+      "اعتبارسنجی اطلاعات",
+      "تطبیق با سفارش خرید (PO)",
+      "ثبت در QuickBooks",
+      "ارسال اعلان",
+    ],
+  
+    architecture: [
+      "صندوق ورودی ایمیل",
+      "موتور OCR",
+      "پردازشگر هوش مصنوعی",
+      "قوانین اعتبارسنجی",
+      "API سیستم حسابداری",
+    ],
+  
+    before: [
+      "ثبت دستی بیش از ۲۰۰ فاکتور",
+      "نرخ خطای ۴ درصد",
+      "تطبیق کند سفارش‌های خرید",
+      "تأخیر در بستن حساب‌های هفتگی",
+    ],
+  
+    after: [
+      "پردازش کاملاً خودکار فاکتورها",
+      "کمتر از ۰.۵٪ موارد نیازمند بررسی",
+      "تطبیق فوری با سفارش خرید",
+      "بستن حساب‌ها به‌صورت روزانه",
+    ],
+  
     impact: [
-      "Bookkeeper redirected to advisory work",
-      "Month-end close shortened by 4 days",
-      "Vendor relationships improved (faster pay)",
-      "Zero missed invoices in 6 months",
+      "آزاد شدن زمان حسابدار برای فعالیت‌های تحلیلی و مشاوره‌ای",
+      "کاهش ۴ روزه زمان بستن حساب‌های پایان ماه",
+      "بهبود روابط با تأمین‌کنندگان به دلیل پرداخت سریع‌تر",
+      "عدم از دست رفتن حتی یک فاکتور طی ۶ ماه",
     ],
+  
     timeline: [
-      { day: "Week 1", title: "Sample analysis", detail: "Invoice variety, extraction schema" },
-      { day: "Week 2", title: "OCR + LLM", detail: "Hybrid pipeline for accuracy" },
-      { day: "Week 3", title: "Validation", detail: "PO matching, exception handling" },
-      { day: "Week 4", title: "Go-live", detail: "QuickBooks sync, monitoring" },
+      {
+        day: "هفته اول",
+        title: "تحلیل نمونه‌ها",
+        detail: "بررسی انواع فاکتورها و طراحی ساختار استخراج اطلاعات",
+      },
+      {
+        day: "هفته دوم",
+        title: "پیاده‌سازی OCR و هوش مصنوعی",
+        detail: "توسعه پایپ‌لاین ترکیبی برای افزایش دقت استخراج",
+      },
+      {
+        day: "هفته سوم",
+        title: "اعتبارسنجی",
+        detail: "تطبیق با سفارش‌های خرید و مدیریت خطاها",
+      },
+      {
+        day: "هفته چهارم",
+        title: "راه‌اندازی نهایی",
+        detail: "اتصال به QuickBooks و فعال‌سازی سیستم مانیتورینگ",
+      },
     ],
-    liveStatus: { label: "Processed this week", value: "184 invoices" },
+  
+    liveStatus: {
+      label: "فاکتورهای پردازش‌شده این هفته",
+      value: "۱۸۴ فاکتور",
+    },
   },
   {
     slug: "social-media-scheduler",
-    title: "Multi-Platform Social Engine",
-    tagline: "One idea in, ten platform-native posts out — scheduled and tracked.",
+  
+    title: "موتور هوشمند مدیریت شبکه‌های اجتماعی",
+  
+    tagline: "یک ایده وارد کنید؛ محتوای آماده برای ۱۰ پلتفرم مختلف، زمان‌بندی و منتشر شود.",
+  
     summary:
-      "Transforms a single content brief into platform-native posts for LinkedIn, X, Instagram, YouTube, and TikTok, with image generation, scheduling, and engagement analytics.",
-    category: "Marketing Automation",
-    technologies: ["n8n", "OpenAI", "Replicate", "Buffer", "Airtable"],
+      "این سیستم یک ایده یا خلاصه محتوا را دریافت کرده و آن را به پست‌های اختصاصی برای لینکدین، ایکس (توییتر)، اینستاگرام، یوتیوب و تیک‌تاک تبدیل می‌کند. همچنین تصاویر موردنیاز را با هوش مصنوعی تولید کرده، انتشار محتوا را زمان‌بندی می‌کند و آمار تعامل کاربران را به‌صورت خودکار تحلیل می‌کند.",
+  
+    category: "اتوماسیون بازاریابی",
+  
+    technologies: [
+      "n8n",
+      "OpenAI",
+      "Replicate",
+      "Buffer",
+      "Airtable",
+    ],
+  
     complexity: 3,
     aiLevel: 5,
     automationLevel: 4,
     businessImpact: 4,
-    status: "Beta",
+  
+    status: "Live",
+  
     createdAt: "2025-11-01",
-    metrics: { tasksExecuted: 980, hoursSaved: 160, costReduction: 2100, successRate: 95.4 },
+  
+    metrics: {
+      tasksExecuted: 980,
+      hoursSaved: 160,
+      costReduction: 2100,
+      successRate: 95.4,
+    },
+  
     problem: [
-      "Content had to be rewritten per platform",
-      "Visuals took hours to produce",
-      "No unified scheduling",
-      "Engagement data lived in silos",
+      "محتوا باید برای هر شبکه اجتماعی به‌صورت جداگانه بازنویسی می‌شد.",
+      "تولید تصاویر ساعت‌ها زمان می‌برد.",
+      "هیچ سیستم یکپارچه‌ای برای زمان‌بندی انتشار وجود نداشت.",
+      "داده‌های تعامل کاربران در ابزارهای مختلف پراکنده بودند.",
     ],
-    workflow: ["Brief Input", "Rewrite Agent", "Image Gen", "Schedule", "Publish", "Analytics"],
-    architecture: ["Content Brief", "LLM Rewriters", "Image Model", "Scheduler", "Analytics Warehouse"],
-    before: ["Manual rewrites", "Stock imagery", "Disconnected tools", "Weekly reports"],
-    after: ["Auto platform tuning", "AI visuals in seconds", "Unified scheduler", "Live analytics"],
+  
+    workflow: [
+      "دریافت ایده محتوا",
+      "بازنویسی با هوش مصنوعی",
+      "تولید تصویر",
+      "زمان‌بندی انتشار",
+      "انتشار محتوا",
+      "تحلیل عملکرد",
+    ],
+  
+    architecture: [
+      "ورودی ایده محتوا",
+      "مدل‌های بازنویسی هوش مصنوعی",
+      "مدل تولید تصویر",
+      "سیستم زمان‌بندی",
+      "انبار داده‌های تحلیلی",
+    ],
+  
+    before: [
+      "بازنویسی کاملاً دستی",
+      "استفاده از تصاویر آماده",
+      "ابزارهای پراکنده",
+      "گزارش‌های هفتگی",
+    ],
+  
+    after: [
+      "بهینه‌سازی خودکار برای هر پلتفرم",
+      "تولید تصاویر با هوش مصنوعی در چند ثانیه",
+      "زمان‌بندی یکپارچه انتشار",
+      "تحلیل زنده عملکرد محتوا",
+    ],
+  
     impact: [
-      "Content output 6× per creator",
-      "Engagement +82% platform-average",
-      "Consistent posting cadence",
-      "Analytics loop drives next content",
+      "۶ برابر افزایش تولید محتوا برای هر تولیدکننده",
+      "افزایش میانگین ۸۲ درصدی تعامل کاربران",
+      "انتشار منظم و بدون وقفه محتوا",
+      "استفاده از داده‌های تحلیلی برای بهبود محتوای آینده",
     ],
+  
     timeline: [
-      { day: "Day 1", title: "Content model", detail: "Platform rules, tone matrix" },
-      { day: "Day 2", title: "AI rewriters", detail: "Per-platform prompt tuning" },
-      { day: "Day 3", title: "Visual gen", detail: "Templates, brand consistency" },
-      { day: "Day 4", title: "Scheduler", detail: "Buffer integration, analytics" },
+      {
+        day: "روز اول",
+        title: "طراحی مدل محتوا",
+        detail: "تعریف قوانین هر پلتفرم و ماتریس لحن برند",
+      },
+      {
+        day: "روز دوم",
+        title: "بازنویسی با هوش مصنوعی",
+        detail: "تنظیم پرامپت اختصاصی برای هر شبکه اجتماعی",
+      },
+      {
+        day: "روز سوم",
+        title: "تولید تصاویر",
+        detail: "طراحی قالب‌ها و حفظ هویت بصری برند",
+      },
+      {
+        day: "روز چهارم",
+        title: "راه‌اندازی سیستم انتشار",
+        detail: "اتصال به Buffer و تحلیل عملکرد محتوا",
+      },
     ],
-    liveStatus: { label: "Posts queued", value: "38" },
+  
+    liveStatus: {
+      label: "پست‌های در صف انتشار",
+      value: "۳۸",
+    },
   },
 ];
 

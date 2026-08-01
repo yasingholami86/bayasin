@@ -40,13 +40,13 @@ function Gallery() {
   return (
     <div className="mx-auto max-w-7xl px-6 py-16">
       <div className="max-w-3xl">
-        <p className="text-xs font-mono uppercase tracking-widest text-brand">// Portfolio</p>
+        <p className="text-xs font-mono uppercase tracking-widest text-brand">// نمونه‌کارها</p>
         <h1 className="mt-3 font-display text-4xl font-semibold md:text-6xl">
-          Automation projects, <span className="text-gradient">measured by impact</span>.
-        </h1>
+      پروژه‌های اتوماسیون، <span className="text-gradient">بر اساس نتیجه و تأثیر واقعی</span>.
+    </h1>
         <p className="mt-4 text-muted-foreground">
-          Every project ships with metrics, architecture, and a clear before/after. No screenshots
-          pretending to be portfolios.
+        هر پروژه همراه با معیارهای عملکرد، معماری سیستم و مقایسه شفاف قبل و بعد ارائه می‌شود.
+        اینجا فقط چند تصویر نمایشی از پروژه‌ها نمی‌بینید؛ بلکه نتایج واقعی و قابل اندازه‌گیری را مشاهده می‌کنید.
         </p>
       </div>
 
@@ -88,38 +88,55 @@ function Gallery() {
             className="group relative overflow-hidden rounded-2xl border border-border bg-surface/60 transition-all hover:border-brand/60 hover:-translate-y-1"
           >
             {/* Preview */}
-            <div className="relative aspect-[16/9] overflow-hidden border-b border-border">
-              <div className="absolute inset-0 grid-bg opacity-40" />
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "radial-gradient(circle at 30% 30%, oklch(0.88 0.22 130 / 0.25), transparent 60%)",
-                }}
-              />
-              <div className="relative flex h-full flex-col justify-between p-6">
-                <div className="flex items-center justify-between">
-                  <span className="rounded-md border border-border bg-background/60 px-2 py-1 text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
-                    {p.category}
-                  </span>
-                  <div className="flex items-center gap-2 rounded-md border border-border bg-background/60 px-2 py-1 text-[10px] font-mono uppercase tracking-widest">
-                    <StatusDot tone={p.status === "Live" ? "live" : "beta"} />
-                    {p.status}
-                  </div>
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {p.workflow.slice(0, 4).map((w, i) => (
-                    <span
-                      key={i}
-                      className="rounded border border-border bg-background/70 px-2 py-0.5 text-[10px] font-mono text-muted-foreground"
-                    >
-                      {w}
-                    </span>
-                  ))}
-                  <span className="px-1 text-[10px] font-mono text-muted-foreground">→</span>
-                </div>
-              </div>
-            </div>
+            <div className="relative aspect-[16/9] overflow-hidden border-b border-border bg-background">
+  {p.gallery?.[0] ? (
+    <>
+      <img
+        src={p.gallery[0].src}
+        alt={p.gallery[0].alt ?? p.title}
+        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+
+      {/* گرادینت برای خوانایی متن */}
+      <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
+
+      {/* Badge ها */}
+      <div className="absolute left-4 right-4 top-4 flex items-center justify-between">
+        <span className="rounded-md border border-white/20 bg-black/40 px-2 py-1 text-[10px] font-mono uppercase tracking-widest text-white backdrop-blur">
+          {p.category}
+        </span>
+
+        <div className="flex items-center gap-2 rounded-md border border-white/20 bg-black/40 px-2 py-1 text-[10px] font-mono uppercase tracking-widest text-white backdrop-blur">
+          <StatusDot tone={p.status === "Live" ? "live" : "beta"} />
+          {p.status}
+        </div>
+      </div>
+
+      {/* Workflow پایین عکس */}
+      <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-1.5">
+        {p.workflow.slice(0, 4).map((w, i) => (
+          <span
+            key={i}
+            className="rounded bg-black/40 px-2 py-1 text-[10px] text-white backdrop-blur"
+          >
+            {w}
+          </span>
+        ))}
+      </div>
+    </>
+  ) : (
+    <>
+      <div className="absolute inset-0 grid-bg opacity-40" />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(circle at 30% 30%, oklch(0.88 0.22 130 / 0.25), transparent 60%)",
+        }}
+      />
+    </>
+  )}
+</div>
 
             <div className="p-6">
               <h3 className="font-display text-lg font-semibold">{p.title}</h3>
