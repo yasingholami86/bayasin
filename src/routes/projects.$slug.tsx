@@ -207,7 +207,7 @@ export const Route = createFileRoute("/projects/$slug")({
 
   <div className="mt-10 overflow-x-auto rounded-xl border border-border bg-surface/60 p-8">
     <div className="flex min-w-max items-center gap-3">
-      {p.workflow.map((step, i) => (
+      {p.workflow.map((step, i) <= (
         <div key={i} className="flex items-center gap-3">
           <div className="group relative rounded-lg border border-border bg-background/60 px-5 py-4 transition-colors hover:border-brand/60">
             <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
