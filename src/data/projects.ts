@@ -391,6 +391,13 @@ export const projects: Project[] = [
       label: "تولید شده",
       value: "۱۲۰ مقاله",
     },
+    gallery: [
+      {
+        src: "../src/images/ChatGPT Image Aug 2, 2026, 04_29_28 PM.png",
+        title: "article",
+        alt: "article Workflow",
+      },
+    ]
   },
   {
   slug: "ecommerce-product-import-automation",
