@@ -275,46 +275,27 @@ import {
   
         {/* Lightbox */}
   
-        {
-          activeImage &&
-  
-          <div
-  
-            onClick={()=>
-              setActiveImage(null)
-            }
-  
-            className="
-            fixed
-            inset-0
-            z-50
-            flex
-            items-center
-            justify-center
-            bg-black/80
-            p-6
-            "
-  
-          >
-  
-  
-            <img
-  
-              src={activeImage}
-  
-              className="
-              max-h-[90vh]
-              max-w-7xl
-              rounded-xl
-              object-contain
-              "
-  
-            />
-  
-  
-          </div>
-  
-        }
+       {/* Lightbox */}
+{activeImage && (
+  <div
+    onClick={() => setActiveImage(null)}
+    className="
+      fixed inset-0 z-50
+      flex items-center justify-center
+      bg-black/80 p-4 sm:p-6
+    "
+  >
+    <img
+      src={activeImage}
+      onClick={(e) => e.stopPropagation()}
+      className="
+        h-auto w-full max-h-[85vh]
+        max-w-4xl object-contain
+        rounded-xl
+      "
+    />
+  </div>
+)}
   
   
   
