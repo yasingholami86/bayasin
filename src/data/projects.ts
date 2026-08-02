@@ -151,25 +151,11 @@ export const projects: Project[] = [
     },
     gallery: [
       {
-        src: "../src/images/Space_87_OBGA.AdobeStock_474813328_Space.jpg",
+        src: "/images/ChatGPT Image Aug 2, 2026, 04_33_28 PM.png",
         title: "Workflow",
         alt: "n8n Workflow",
       },
-      {
-        src: "../src/images/Space_87_OBGA.AdobeStock_474813328_Space.jpg",
-        title: "Database",
-        alt: "PostgreSQL",
-      },
-      {
-        src: "../src/images/Space_87_OBGA.AdobeStock_474813328_Space.jpg",
-        title: "Telegram",
-        alt: "Telegram Bot",
-      },
-      {
-        src:  "../src/images/Space_87_OBGA.AdobeStock_474813328_Space.jpg",
-        title: "Dashboard",
-        alt: "Analytics Dashboard",
-      },
+    
     ],
   },
   {
@@ -393,7 +379,7 @@ export const projects: Project[] = [
     },
     gallery: [
       {
-        src: "../src/images/ChatGPT Image Aug 2, 2026, 04_29_28 PM.png",
+        src: "/images/ChatGPT Image Aug 2, 2026, 04_29_28 PM.png",
         title: "article",
         alt: "article Workflow",
       },
