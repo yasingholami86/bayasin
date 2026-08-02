@@ -220,7 +220,7 @@ export const Route = createFileRoute("/projects/$slug")({
           {i < p.workflow.length - 1 && (
             <div className="flex items-center">
               <div className="h-px w-6 bg-brand/60" />
-              <ArrowRight className="h-4 w-4 text-brand" />
+              <ArrowLeft className="h-4 w-4 text-brand" />
             </div>
           )}
         </div>
