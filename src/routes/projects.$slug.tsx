@@ -5,6 +5,7 @@ import { Counter } from "@/components/site/Counter";
 import { StatusDot } from "@/components/site/StatusDot";
 import { getProject, projects, type Project } from "@/data/projects";
 import { ProjectGallery } from "@/components/ui/project_gallery";
+import { MoveRight } from "lucide-react";
 
 export const Route = createFileRoute("/projects/$slug")({
   loader: ({ params }) => {
@@ -221,6 +222,7 @@ export const Route = createFileRoute("/projects/$slug")({
             <div className="flex items-center">
               <div className="h-px w-6 bg-brand/60" />
               <ArrowLeft className="h-4 w-4 text-brand" />
+              <MoveRight className="h-4 w-4 text-brand rtl:rotate-180" />
             </div>
           )}
         </div>
